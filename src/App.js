@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import AddItem from "./components/AddItem";
+import Items from "./components/Items";
+import { getItems } from "./services/ItemService";
 
 function App() {
+  const toggleComplete = (item) => {
+    let updatedItem = { ...item, isCompleted: !item.isCompleted };
+    return updatedItem;
+  };
+  const onItem = (id) => {
+    const updatedItems = items.map((item) =>
+      item.id === id ? toggleComplete(item) : item
+    );
+    setItems(updatedItems);
+  };
+
+  const onDelete = (id) => {
+    console.log(id);
+    setItems(items.filter((item) => item.id !== id));
+  };
+
+  const onAddItem = (item) => {
+    let newItem = {
+      id: items.length + 1,
+      name: item,
+      isCompleted: false,
+    };
+    let updatedItems = [...items];
+    updatedItems.push(newItem);
+    setItems(updatedItems);
+  };
+
+  const [items, setItems] = useState(getItems());
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section className="section-center">
+      <h3>Grocery List</h3>
+      <AddItem onAddItem={onAddItem} />
+      <Items items={items} onItem={onItem} onDelete={onDelete} />
+    </section>
   );
 }
 
