@@ -93,8 +93,8 @@ h4 {
   font-size: 0.875rem;
 }
 p {
-  margin-bottom: 1.25rem;
   color: var(--clr-grey-5);
+  width: 80%;
 }
 p.completed {
   text-decoration: line-through;

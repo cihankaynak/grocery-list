@@ -4,12 +4,8 @@ import { FaTrash } from "react-icons/fa";
 const Item = ({ item, onItem, onDelete }) => {
   return (
     <article className="grocery-item">
-      <p
-        className={item.isCompleted ? "completed" : ""}
-        onClick={() => onItem(item.id)}
-      >
-        {item.name}
-      </p>
+      <input type="checkbox" onClick={() => onItem(item.id)} />
+      <p className={item.isCompleted ? "completed" : ""}>{item.name}</p>
       <button className="delete-btn" onClick={() => onDelete(item.id)}>
         <FaTrash />
       </button>
