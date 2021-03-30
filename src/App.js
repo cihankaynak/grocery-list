@@ -38,6 +38,9 @@ function App() {
       <h3>Grocery List</h3>
       <AddItem onAddItem={onAddItem} />
       <Items items={items} onItem={onItem} onDelete={onDelete} />
+      <button className="clear-btn" onClick={() => setItems([])}>
+        Clear All
+      </button>
     </section>
   );
 }
