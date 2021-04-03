@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AddItem from "./components/AddItem";
 import Items from "./components/Items";
 import { getItems, saveItems, clearItems } from "./services/ItemService";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const toggleComplete = (item) => {
@@ -17,7 +18,6 @@ function App() {
   };
 
   const onDelete = (id) => {
-    console.log(id);
     const retainedItems = items.filter((item) => item.id !== id);
     setItems(retainedItems);
     saveItems(retainedItems);
@@ -25,7 +25,7 @@ function App() {
 
   const onAddItem = (item) => {
     let newItem = {
-      id: items.length + 1,
+      id: uuidv4(),
       name: item,
       isCompleted: false,
     };
